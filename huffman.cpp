@@ -1,3 +1,5 @@
+// taken from GeeksforGeeks
+// https://www.geeksforgeeks.org/huffman-coding-greedy-algo-3/#
 // C++ program for Huffman Coding 
 #include <cstdlib> 
 #include <iostream> 

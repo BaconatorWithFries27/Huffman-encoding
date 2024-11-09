@@ -75,6 +75,8 @@ void printArr(freqArr f) {
     cout << f.freqs[finSize - 1];
     cout << endl;
 
+    cout << "Size: " << finSize << endl;
+
     return;
 
 }
