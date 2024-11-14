@@ -11,8 +11,8 @@ int main(){
     string input;
 
     cout << "Enter text to process: \n";\
-    getline(cin, input);
-
+    //getline(cin, input);
+    input = "the quick brown fox jumps over the lazy dog.";
     cout << input << endl;
 
     freqArr steve = parseString(input);
@@ -41,8 +41,15 @@ int main(){
 
 	printCodes(root, intarr, top); 
 
-    string bitstream = makeBitstream(root, input);
-    cout << bitstream << endl;
+    vector<string> bitstream = makeBitstream(root, input, freq);
+    int bitlength = bitstream.size();
+    string bitString[bitlength];
+    for (int i = 0; i < bitlength; i++)
+    {
+        bitString[i] = bitstream[i];
+    }
+    
+    cout << bitString << endl;
     //decodeBitstream(root, bitstream);
 
     return 0;
