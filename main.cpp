@@ -3,14 +3,16 @@
 #include <vector>
 #include "huffman.cpp"
 #include "inputProcessing.cpp"
+#include <string>
+
 using namespace std; 
 
 int main(){
 
     string input;
 
-    cout << "Enter text to process: \n";\
-    getline(cin, input);
+    std::cout << "Enter text to process: \n";
+    std::getline(cin, input);
 
     cout << input << endl;
 
@@ -21,6 +23,7 @@ int main(){
     int size = steve.chars.size();
 
     char arr[size];
+
     int freq[size];
 
     for (int i = 0; i < size; i++)
