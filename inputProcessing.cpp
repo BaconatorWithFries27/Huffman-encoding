@@ -42,7 +42,7 @@ freqArr parseString(string s){
             if(!isfound)
             {
                 int arrpos = parsedArr.chars.size();
-                parsedArr.chars.insert(parsedArr.chars.begin() + arrpos, s[i]);
+                parsedArr.chars.insert(parsedArr.chars.begin() + arrpos, letter);
                 parsedArr.freqs.insert(parsedArr.freqs.begin() + arrpos, 1);
                 isfound = true;
             }
@@ -74,6 +74,8 @@ void printArr(freqArr f) {
     }
     cout << f.freqs[finSize - 1];
     cout << endl;
+
+    cout << "Size: " << finSize << endl;
 
     return;
 
