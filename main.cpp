@@ -41,15 +41,16 @@ int main(){
 
 	printCodes(root, intarr, top); 
 
-    vector<string> bitstream = makeBitstream(root, input, freq);
+    vector<char> bitstream = makeBitstream(root, input, freq);
     int bitlength = bitstream.size();
     string bitString[bitlength];
     for (int i = 0; i < bitlength; i++)
     {
         bitString[i] = bitstream[i];
+        cout << bitString[i];
     }
     
-    cout << bitString << endl;
+    cout << endl;
     //decodeBitstream(root, bitstream);
 
     return 0;
