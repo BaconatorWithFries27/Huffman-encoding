@@ -61,19 +61,19 @@ bitmap makeBitmap(struct MinHeapNode* root, int arr[], int top){
 
 struct bitmap {
     vector<char> chars;       // Store array of chars
-    vector<string> values;    // Store binary representations as strings
+    vector<string> binaryValues;    // Store binary representations as strings
 };
 
 bitmap bitmapOutput;
 
 void makeBitmap(struct MinHeapNode* root, int arr[], int top) {
-    // Assign 0 to left edge and recur 
+    // Assign 0 to left edge and recurse
     if (root->left) { 
         arr[top] = 0; 
         makeBitmap(root->left, arr, top + 1); 
     } 
 
-    // Assign 1 to right edge and recur 
+    // Assign 1 to right edge and recurse
     if (root->right) { 
         arr[top] = 1; 
         makeBitmap(root->right, arr, top + 1); 
@@ -90,7 +90,7 @@ void makeBitmap(struct MinHeapNode* root, int arr[], int top) {
             result += to_string(arr[i]);  // Convert each int to char and append
         }
 
-        bitmapOutput.values.push_back(result);  // Add the binary representation as string
+        bitmapOutput.binaryValues.push_back(result);  // Add the binary representation as string
     }
 
 
@@ -103,7 +103,7 @@ void makeBitmap(struct MinHeapNode* root, int arr[], int top) {
 //}
 
 
-vector<char> makeBitstream(MinHeapNode* root, string input, int arr[]) {
+/*vector<char> makeBitstream(MinHeapNode* root, string input, int arr[]) {
 
     //do stuff
     
@@ -123,7 +123,7 @@ vector<char> makeBitstream(MinHeapNode* root, string input, int arr[]) {
         {
             if (huffchar == bitmapOutput.chars[j])
             {
-                string tovec = bitmapOutput.values[j];
+                string tovec = bitmapOutput.binaryValues[j];
                 int tovecSize = tovec.size();
                 for (int k = 0; k < tovecSize; k++)
                 {
@@ -133,5 +133,32 @@ vector<char> makeBitstream(MinHeapNode* root, string input, int arr[]) {
         }
     }
     return BSoutput;
+}*/
+string makeBitstream(MinHeapNode* root, string input, int arr[]) {
+
+	//do stuff
+
+	makeBitmap(root, arr, 0);
+
+	//makeBitmap(root, arr, 0);
+
+	int strSize = input.size();
+
+	string huffmanString;
+
+	for (int i = 0; i < strSize; i++) //match char to int map
+	{
+		char huffchar = input[i];
+		int bitmapSize = bitmapOutput.chars.size();
+		for (int j = 0; j < bitmapSize; j++)
+		{
+			if (huffchar == bitmapOutput.chars[j])
+			{
+				string tovec = bitmapOutput.binaryValues[j];
+				huffmanString = huffmanString + tovec;
+			}
+		}
+	}
+	return huffmanString;
 }
 

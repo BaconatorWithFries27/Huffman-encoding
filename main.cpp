@@ -15,22 +15,22 @@ int main(){
     input = "the quick brown fox jumps over the lazy dog.";
     cout << input << endl;
 
-    freqArr steve = parseString(input);
+    freqArr completedArrays = parseString(input);
 
-    printArr(steve);
+    printArr(completedArrays);
 
-    int size = steve.chars.size();
+    int size = completedArrays.chars.size();
 
     char arr[size];
     int freq[size];
 
-    
+
     // this would be easy to parallelize eventually
     // (or rewrite the huff algo to accept vectors)
-    for (int i = 0; i < size; i++) 
+    for (int i = 0; i < size; i++)
     {
-        arr[i] = steve.chars[i];
-        freq[i] = steve.freqs[i];
+        arr[i] = completedArrays.chars[i];
+        freq[i] = completedArrays.freqs[i];
     }
     
 
@@ -41,17 +41,9 @@ int main(){
 
 	printCodes(root, intarr, top); 
 
-    vector<char> bitstream = makeBitstream(root, input, freq);
-    int bitlength = bitstream.size();
-    string bitString[bitlength];
-    for (int i = 0; i < bitlength; i++)
-    {
-        bitString[i] = bitstream[i];
-        cout << bitString[i];
-    }
-    
-    cout << endl;
-    //decodeBitstream(root, bitstream);
+    string bitstream = makeBitstream(root, input, freq);
+    std::cout << std::dec << bitstream << endl;
+
 
     return 0;
 }

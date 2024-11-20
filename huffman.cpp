@@ -293,18 +293,4 @@ void HuffmanCodes(char data[], int freq[], int size)
 	printCodes(root, arr, top); 
 } 
 
-// Driver code 
-/*int main()
-{ 
 
-	char arr[] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'I', 'j' }; 
-	//char arr[] = "abcdefgh";
-    int freq[] = { 5, 9, 12, 13, 16, 45, 65, 85, 88, 102, 120, 125 }; 
-
-	int size = sizeof(arr) / sizeof(arr[0]); 
-
-	HuffmanCodes(arr, freq, size); 
-
-	return 0; 
-}
-*/

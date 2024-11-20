@@ -18,7 +18,7 @@ struct freqArr {
 
 freqArr parseString(string s){
     //check each character and add to array
-    //increase counter with each reoccurance
+    //increase counter with each occurrence
     int sLen = s.length();
 
     freqArr parsedArr;
@@ -77,7 +77,7 @@ void printArr(freqArr f) {
 
     cout << "Size: " << finSize << endl;
 
-    return;
+
 
 }
 
