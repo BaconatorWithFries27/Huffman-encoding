@@ -186,8 +186,8 @@ int isLeaf(struct MinHeapNode* root)
 // equal to size and inserts all character of 
 // data[] in min heap. Initially size of 
 // min heap is equal to capacity 
-struct MinHeap* createAndBuildMinHeap(char data[], 
-									int freq[], int size) 
+struct MinHeap* createAndBuildMinHeap(vector<char> data,
+									vector<int> freq, int size)
 
 { 
 
@@ -203,8 +203,8 @@ struct MinHeap* createAndBuildMinHeap(char data[],
 } 
 
 // The main function that builds Huffman tree 
-struct MinHeapNode* buildHuffmanTree(char data[], 
-									int freq[], int size) 
+struct MinHeapNode* buildHuffmanTree(vector<char> data,
+									vector<int> freq, int size)
 
 { 
 	struct MinHeapNode *left, *right, *top; 
@@ -279,12 +279,12 @@ void printCodes(struct MinHeapNode* root, int arr[],
 // The main function that builds a 
 // Huffman Tree and print codes by traversing 
 // the built Huffman Tree 
-void HuffmanCodes(char data[], int freq[], int size) 
+void HuffmanCodes(vector<char> data, vector<int> freq, int size)
 
 { 
 	// Construct Huffman Tree 
 	struct MinHeapNode* root 
-		= buildHuffmanTree(data, freq, size); 
+		= buildHuffmanTree(data, freq, size);
 
 	// Print Huffman codes using 
 	// the Huffman tree built above 
@@ -293,18 +293,4 @@ void HuffmanCodes(char data[], int freq[], int size)
 	printCodes(root, arr, top); 
 } 
 
-// Driver code 
-/*int main() 
-{ 
 
-	char arr[] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'I', 'j' }; 
-	//char arr[] = "abcdefgh";
-    int freq[] = { 5, 9, 12, 13, 16, 45, 65, 85, 88, 102, 120, 125 }; 
-
-	int size = sizeof(arr) / sizeof(arr[0]); 
-
-	HuffmanCodes(arr, freq, size); 
-
-	return 0; 
-}
-*/

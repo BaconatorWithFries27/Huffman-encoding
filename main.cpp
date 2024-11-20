@@ -15,43 +15,27 @@ int main(){
     input = "the quick brown fox jumps over the lazy dog.";
     cout << input << endl;
 
-    freqArr steve = parseString(input);
+    /* Ask inputProcessing to parse the input string into a freqArr ->
+     * 1. Vector of all the character in the string,
+     * 2. Vector of the frequency of occurrence of all character in the string.
+     */
+    freqArr completedArrays = parseString(input);
 
-    printArr(steve);
+    printArr(completedArrays);
 
-    int size = steve.chars.size();
+    int size = completedArrays.chars.size();
 
-    char arr[size];
-    int freq[size];
-
-    
-    // this would be easy to parallelize eventually
-    // (or rewrite the huff algo to accept vectors)
-    for (int i = 0; i < size; i++) 
-    {
-        arr[i] = steve.chars[i];
-        freq[i] = steve.freqs[i];
-    }
-    
-
-    //HuffmanCodes(arr, freq, size);
-    struct MinHeapNode* root = buildHuffmanTree(arr, freq, size);
+    // Build the huffman tree from the above freqArr struct
+    struct MinHeapNode* root = buildHuffmanTree(completedArrays.chars, completedArrays.freqs, size);
 
     int intarr[MAX_TREE_HT], top = 0; 
 
 	printCodes(root, intarr, top); 
 
-    vector<char> bitstream = makeBitstream(root, input, freq);
-    int bitlength = bitstream.size();
-    string bitString[bitlength];
-    for (int i = 0; i < bitlength; i++)
-    {
-        bitString[i] = bitstream[i];
-        cout << bitString[i];
-    }
-    
-    cout << endl;
-    //decodeBitstream(root, bitstream);
+    // Convert the input string into a bitstream using the above huffman tree.
+    string bitstream = makeBitstream(root, input, completedArrays.freqs);
+    std::cout << std::dec << bitstream << endl;
+
 
     return 0;
 }
