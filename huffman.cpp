@@ -294,7 +294,7 @@ void HuffmanCodes(char data[], int freq[], int size)
 } 
 
 // Driver code 
-/*int main() 
+/*int main()
 { 
 
 	char arr[] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'I', 'j' }; 

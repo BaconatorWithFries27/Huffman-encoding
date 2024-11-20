@@ -40,7 +40,7 @@ int main(){
     }
     
 
-    //HuffmanCodes(arr, freq, size);
+    /*//HuffmanCodes(arr, freq, size);
     struct MinHeapNode* root = buildHuffmanTree(arr, freq, size);
 
     int intarr[MAX_TREE_HT], top = 0;
@@ -58,5 +58,5 @@ int main(){
     cout << bitString << endl;
     //decodeBitstream(root, bitstream);
 
-    return 0;
+    return 0;*/
 }
