@@ -11,7 +11,7 @@ struct bitmap {
 
 bitmap bitmapOutput;
 
-void makeBitmap(struct MinHeapNode* root, int arr[], int top) {
+void makeBitmap(struct MinHeapNode* root, vector<int> arr, int top) {
     // Assign 0 to left edge and recurse
     if (root->left) { 
         arr[top] = 0; 
@@ -47,7 +47,7 @@ void makeBitmap(struct MinHeapNode* root, int arr[], int top) {
 //    return makeBitmap(root, arr, top, bitmapOutput);
 //}
 
-string makeBitstream(MinHeapNode* root, string input, int arr[]) {
+string makeBitstream(MinHeapNode* root, string input, vector<int> arr) {
 
 	//do stuff
 

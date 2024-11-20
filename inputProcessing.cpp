@@ -36,6 +36,7 @@ freqArr parseString(string s){
                 {
                     parsedArr.freqs[j] = parsedArr.freqs[j] + 1;
                     isfound = true;
+                    break;
                 }       
             }
 
@@ -76,8 +77,6 @@ void printArr(freqArr f) {
     cout << endl;
 
     cout << "Size: " << finSize << endl;
-
-
 
 }
 
