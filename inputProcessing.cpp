@@ -11,7 +11,6 @@ struct freqArr {
 
     //store array of chars
     vector<char> chars;
-
     //store frequencies 
     vector<int> freqs;
 };
