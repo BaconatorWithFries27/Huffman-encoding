@@ -1,12 +1,12 @@
 /* This file is responsible for taking the completed string of bits, built by the rest of the program
- * and converting it back to the original message.
+* and converting it back to the original message.
  *
  */
-
+#include <iostream>
+using namespace std;
 
 void decode(string bitString, struct MinHeapNode* root) {
- cout << "The string is currently" << endl;
- std::cout << std::dec << bitString << endl;
+
  int counter = 0;
  MinHeapNode* originalRoot = root;
  string humanReadableString;
@@ -47,18 +47,20 @@ void decode(string bitString, struct MinHeapNode* root) {
   */
   if (isLeaf(root)) {
    root = originalRoot;
-   counter++;
+   bitmap bitmapOutput = getBitmap();
+
+   for (int i = 0; i < bitmapOutput.binaryValues.size(); i++) {
+    if (bitmapOutput.binaryValues[i] == potentialChar) {
+     cout << bitmapOutput.chars[i];
+     potentialChar = "";
+    }
+
+   }
+
   }
-
-
-
-
-
-
-
 
  }
 
- cout << counter << endl;
+
 
 }
