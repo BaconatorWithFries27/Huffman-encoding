@@ -1,8 +1,6 @@
 // c++ program to take an input and determine frequency of characters
-#include <cstdlib> 
 #include <iostream>
 #include <vector>
-//#include "huffman.cpp"
 using namespace std; 
 
 struct freqArr {
@@ -11,7 +9,6 @@ struct freqArr {
 
     //store array of chars
     vector<char> chars;
-
     //store frequencies 
     vector<int> freqs;
 };

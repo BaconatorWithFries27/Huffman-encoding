@@ -1,6 +1,4 @@
-#include <cstdlib> 
 #include <iostream>
-//#include <vector>
 #include "huffman.cpp"
 using namespace std;
 
@@ -47,7 +45,7 @@ void makeBitmap(struct MinHeapNode* root, vector<int> arr, int top) {
 //    return makeBitmap(root, arr, top, bitmapOutput);
 //}
 
-string makeBitstream(MinHeapNode* root, string input, vector<int> arr) {
+string makeBitString(MinHeapNode* root, string input, vector<int> arr) {
 
 	//do stuff
 
@@ -73,5 +71,9 @@ string makeBitstream(MinHeapNode* root, string input, vector<int> arr) {
 		}
 	}
 	return huffmanString;
+}
+
+bitmap getBitmap() {
+	return bitmapOutput;
 }
 
