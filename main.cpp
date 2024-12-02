@@ -12,7 +12,7 @@ int main(){
 
     cout << "Enter text to process: \n";\
     //getline(cin, input);
-    input = "the quick brown fox jumps over the lazy dog.";
+    input = "The quick brown fox jumps over the lazy dog.";
     cout << input << endl;
 
     /* Ask inputProcessing to parse the input string into a freqArr ->

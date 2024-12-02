@@ -4,8 +4,6 @@
 using namespace std; 
 
 struct freqArr {
-    // These should match unless something bad happens with you data
-    // I'm not adding an enforcement mechanism yet
 
     //store array of chars
     vector<char> chars;
@@ -14,12 +12,14 @@ struct freqArr {
 };
 
 freqArr parseString(string s){
-    //check each character and add to array
-    //increase counter with each occurrence
+
     int sLen = s.length();
 
     freqArr parsedArr;
 
+    /*check each character and add to array
+     *increase counter with each occurrence
+     */
     for (int i = 0; i < sLen; i++)
     {
         bool isfound = false;
@@ -70,11 +70,8 @@ void printArr(freqArr f) {
     {
         cout << f.freqs[i] << ", ";
     }
+
     cout << f.freqs[finSize - 1];
     cout << endl;
-
     cout << "Size: " << finSize << endl;
-
 }
-
-//
