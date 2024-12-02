@@ -4,10 +4,12 @@
 #include "inputProcessing.cpp"
 #include "makeBitstream.cpp"
 #include "BitStringDecoder.cpp"
-using namespace std; 
+#include <chrono>
+using namespace std;
+using namespace std::chrono;
 
 int main(){
-
+    auto start = high_resolution_clock::now();
     string input;
 
     cout << "Enter text to process: \n";\
@@ -36,8 +38,14 @@ int main(){
     string bitstream = makeBitString(root, input, completedArrays.freqs);
     std::cout << std::dec << bitstream << endl;
 
-    cout<< "Beginning decoding process..." << endl;
+    cout<< "\nBeginning decoding process..." << endl;
 
     decode(bitstream, root);
+
+    auto stop = high_resolution_clock::now();
+
+    auto duration = duration_cast<microseconds>(stop - start);
+
+    cout << "\nRun time is: " << duration.count() << " microseconds" << endl;
 
 }
