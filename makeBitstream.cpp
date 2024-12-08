@@ -47,20 +47,16 @@ void makeBitmap(struct MinHeapNode* root, vector<int> arr, int top) {
 
 string makeBitString(MinHeapNode* root, string input, vector<int> arr) {
 
-	//do stuff
-
 	makeBitmap(root, arr, 0);
 
-	//makeBitmap(root, arr, 0);
-
 	int strSize = input.size();
-
 	string huffmanString;
 
 	for (int i = 0; i < strSize; i++) //match char to int map
 	{
 		char huffchar = input[i];
 		int bitmapSize = bitmapOutput.chars.size();
+
 		for (int j = 0; j < bitmapSize; j++)
 		{
 			if (huffchar == bitmapOutput.chars[j])

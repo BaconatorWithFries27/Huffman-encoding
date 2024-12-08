@@ -4,11 +4,14 @@
 #include "inputProcessing.cpp"
 #include "makeBitstream.cpp"
 #include "BitStringDecoder.cpp"
-using namespace std; 
+#include <chrono>
+#include "TestText.cpp"
+using namespace std;
+using namespace std::chrono;
 
 int main(){
+    auto start = high_resolution_clock::now();
 
-    string input;
 
     cout << "Enter text to process: \n";\
 
@@ -24,6 +27,7 @@ int main(){
     input = "Lorem ipsum odor amet, consectetuer adipiscing elit. Maximus suscipit diam sollicitudin luctus; ad eget. Fermentum lobortis nulla euismod odio suscipit adipiscing. Praesent nulla ullamcorper ridiculus vestibulum enim scelerisque. Interdum velit vehicula urna, enim non pellentesque. Facilisis per taciti taciti euismod feugiat lorem. Leo est aenean inceptos; magnis tempor himenaeos.Elit cubilia primis ex aptent imperdiet maximus viverra pretium. Nascetur cras praesent facilisis tortor fames platea. Vivamus eleifend eu justo; accumsan congue consectetur. Habitasse euismod senectus curabitur per varius per faucibus. Faucibus himenaeos penatibus volutpat; libero nunc luctus dui. Tellus volutpat efficitur sociosqu platea hendrerit nulla cursus fermentum dictumst. Velit volutpat ante fermentum commodo accumsan in montes.Volutpat primis nec vitae diam faucibus nibh blandit suspendisse. Egestas sodales felis risus platea blandit sociosqu maximus netus. Volutpat placerat felis platea cras arcu natoque ac a. Interdum faucibus dui convallis gravida fringilla orci tincidunt efficitur. Mauris cras blandit ullamcorper adipiscing sem enim. Accumsan ornare senectus est ridiculus mollis quam. Ex accumsan id sodales augue himenaeos.Eu senectus dictum ex parturient blandit lobortis, cras penatibus. Penatibus ad rutrum ullamcorper amet vestibulum interdum. Odio lectus nostra nam; vitae tristique risus. Sed etiam sit accumsan condimentum fringilla est; nisi magna. Auctor diam senectus, aliquam pretium quis maximus. Commodo vestibulum id mauris mattis tellus semper convallis ante scelerisque. Mauris vitae mi vivamus ipsum libero penatibus sem. Egestas pretium libero primis in dignissim litora varius. Pretium lectus mi taciti nec scelerisque pellentesque senectus.Praesent at gravida egestas euismod ad. Velit imperdiet fames integer fames praesent quam. Aptent nibh vulputate commodo lorem habitant curabitur mollis. Varius litora etiam bibendum arcu ultrices cras donec etiam. Sociosqu ligula phasellus mollis venenatis elementum sagittis finibus senectus. Torquent fames vitae tincidunt blandit tincidunt platea. Cursus quisque tristique duis quam nibh praesent. Mus elit arcu odio non dolor sem pharetra. Sapien efficitur at scelerisque dis inceptos dictum fusce.Condimentum conubia dictumst scelerisque pretium placerat enim. Sit auctor lobortis tempus tempor nulla duis. Euismod rutrum cras commodo magna enim porta. Aenean auctor id molestie eu elit pretium maecenas ut in. Sodales cursus pretium erat maecenas nulla. Orci himenaeos eu orci, blandit molestie lectus a. Magnis viverra aenean ac sem; nunc fringilla eleifend. Est parturient sociosqu sagittis curae efficitur convallis.Senectus faucibus non; praesent fusce vehicula risus aptent at tristique. Lobortis diam facilisis vel sodales integer ridiculus rhoncus. Primis urna adipiscing platea in scelerisque consectetur. Morbi sociosqu sodales urna ex varius; ex turpis. Aptent venenatis tellus parturient molestie, ultricies mollis erat. Aliquet dapibus laoreet vivamus nascetur ornare posuere in lacinia. Consequat commodo tortor mollis nisi id ipsum rutrum. Euismod potenti facilisis; elementum fringilla ultrices etiam cubilia. Mollis hendrerit ut augue nulla semper dictum.Felis potenti nisl massa himenaeos urna. Vulputate taciti mus morbi integer, eleifend integer cubilia. Fermentum sociosqu metus id finibus facilisis. Posuere maximus pretium auctor ipsum sed ultrices vitae dui. Potenti imperdiet purus mauris elit vestibulum lacus auctor. Id hendrerit etiam felis primis arcu natoque suscipit. Tristique ante et tellus venenatis ullamcorper nec velit in. Fames facilisi gravida magnis odio eu vivamus.Elementum montes dapibus maximus hendrerit habitant sem. Per malesuada risus ridiculus ipsum gravida eget natoque gravida. Quam euismod fames dis massa amet class felis volutpat. Ullamcorper curae senectus odio nibh rutrum tempor facilisi quisque. Maecenas class luctus erat sollicitudin mus ligula orci morbi. Cubilia molestie consectetur arcu proin massa quam. Fermentum imperdiet leo suscipit phasellus sed ad. Blandit nascetur viverra finibus risus faucibus diam faucibus.Fermentum tristique nunc fames habitant ante ultricies ridiculus gravida. Leo eleifend ullamcorper inceptos hac aenean. Aenean montes himenaeos faucibus senectus eleifend? Fames sollicitudin dolor neque nostra lacinia pretium; elit ridiculus. Nam luctus pellentesque potenti magnis tellus ultrices cursus nec a. Tempus ridiculus sociosqu fames molestie quam nisl. Apellentesque rutrum nibh himenaeos; tortor dapibus tempus.";
     
     cout << input << endl;
+
 
     std::cout << "input length: " << input.length() << endl;
 
@@ -42,19 +46,28 @@ int main(){
 
     int intarr[MAX_TREE_HT], top = 0; 
 
-	printCodes(root, intarr, top); 
+	printCodes(root, intarr, top);
 
     // TODO: take the bitstream and break it into chunks and process those seperately for parallelism reasons
         // like take the input and break it into a fixed length and make more calls to the decoder?
 
     // Convert the input string into a bitstream using the above huffman tree.
     string bitstream = makeBitString(root, input, completedArrays.freqs);
+
+
     std::cout << std::dec << bitstream << endl;
     
     std::cout << "bitstring length: " << bitstream.length() << endl;
     
     cout<< "Beginning decoding process..." << endl;
 
+
     decode(bitstream, root);
+
+    auto stop = high_resolution_clock::now();
+
+    auto duration = duration_cast<microseconds>(stop - start);
+
+    cout << "\nRun time is: " << duration.count() << " microseconds" << endl;
 
 }
