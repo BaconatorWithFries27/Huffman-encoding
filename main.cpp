@@ -12,6 +12,7 @@ using namespace std::chrono;
 int main(){
     auto start = high_resolution_clock::now();
 
+    string input;
 
     cout << "Enter text to process: \n";\
 
