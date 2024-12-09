@@ -57,11 +57,13 @@ string makeBitString(MinHeapNode* root, string input, vector<int> arr) {
 	string huffmanString;
 
 	int seglength = (strSize / NUMTHREADS);
-	vector<string> privStr(NUMTHREADS);
+	std::vector<string> privStr(NUMTHREADS);
 
-      #pragma omp parallel default(shared)
+#pragma omp parallel default(shared)
       {
+
          int thread_id = 0;
+		 
 #ifdef _OPENMP
          thread_id = omp_get_thread_num();
 #endif
