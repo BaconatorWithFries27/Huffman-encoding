@@ -1,5 +1,6 @@
 #include <iostream>
 #include "huffman.cpp"
+#include <omp.h>
 using namespace std;
 
 struct bitmap {
