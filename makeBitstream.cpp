@@ -63,7 +63,7 @@ string makeBitString(MinHeapNode* root, string input, vector<int> arr) {
       {
 
          int thread_id = 0;
-		 
+
 #ifdef _OPENMP
          thread_id = omp_get_thread_num();
 #endif
@@ -87,6 +87,7 @@ string makeBitString(MinHeapNode* root, string input, vector<int> arr) {
 
 	for (size_t m = 0; m < NUMTHREADS; m++){
 		huffmanString = huffmanString + privStr[m];
+		cout << huffmanString << endl;
 	}
 	return huffmanString;
 }
