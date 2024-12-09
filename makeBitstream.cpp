@@ -45,6 +45,9 @@ void makeBitmap(struct MinHeapNode* root, vector<int> arr, int top) {
 //    return makeBitmap(root, arr, top, bitmapOutput);
 //}
 
+#define NUMTHREADS 8
+
+
 string makeBitString(MinHeapNode* root, string input, vector<int> arr) {
 
 	makeBitmap(root, arr, 0);
@@ -52,9 +55,20 @@ string makeBitString(MinHeapNode* root, string input, vector<int> arr) {
 	int strSize = input.size();
 	string huffmanString;
 
-	for (int i = 0; i < strSize; i++) //match char to int map
+	int seglength = (strSize / NUMTHREADS);
+	vector<string> privStr(NUMTHREADS);
+
+      #pragma omp parallel default(shared)
+      {
+         int thread_id = 0;
+#ifdef _OPENMP
+         thread_id = omp_get_thread_num();
+#endif
+
+#pragma omp parallel for	
+	for (int i = 0; i < seglength; i++) //match char to int map
 	{
-		char huffchar = input[i];
+		char huffchar = input[(thread_id * seglength) + i];
 		int bitmapSize = bitmapOutput.chars.size();
 
 		for (int j = 0; j < bitmapSize; j++)
@@ -62,9 +76,14 @@ string makeBitString(MinHeapNode* root, string input, vector<int> arr) {
 			if (huffchar == bitmapOutput.chars[j])
 			{
 				string tovec = bitmapOutput.binaryValues[j];
-				huffmanString = huffmanString + tovec;
+				privStr[thread_id] = privStr[thread_id] + tovec;
 			}
 		}
+	}
+	}
+
+	for (size_t m = 0; m < NUMTHREADS; m++){
+		huffmanString = huffmanString + privStr[m];
 	}
 	return huffmanString;
 }
