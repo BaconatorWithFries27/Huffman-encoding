@@ -46,18 +46,18 @@ void makeBitmap(struct MinHeapNode* root, vector<int> arr, int top) {
 //    return makeBitmap(root, arr, top, bitmapOutput);
 //}
 
-#define NUMTHREADS 8
-
 
 string makeBitString(MinHeapNode* root, string input, vector<int> arr) {
 
 	makeBitmap(root, arr, 0);
 
+    int numThreads = omp_get_num_threads(void);
+
 	int strSize = input.size();
 	string huffmanString;
 
-	int seglength = (strSize / NUMTHREADS);
-	std::vector<string> privStr(NUMTHREADS);
+	int seglength = (strSize / numThreads);
+	std::vector<string> privStr(numThreads);
 
 #pragma omp parallel default(shared)
       {
@@ -85,7 +85,7 @@ string makeBitString(MinHeapNode* root, string input, vector<int> arr) {
 	}
 	}
 
-	for (size_t m = 0; m < NUMTHREADS; m++){
+	for (size_t m = 0; m < numThreads; m++){
 		huffmanString = huffmanString + privStr[m];
 		cout << huffmanString << endl;
 	}
