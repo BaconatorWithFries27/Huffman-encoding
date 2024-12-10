@@ -86,10 +86,29 @@ string makeBitString(MinHeapNode* root, string input, vector<int> arr) {
             }
         }
     }
+    
 	for (size_t m = 0; m < numThreads; m++){
 		huffmanString = huffmanString + privStr[m];
 		cout << huffmanString << endl;
 	}
+
+    if ((strSize % numThreads) != 0){
+        int endParChar = seglength * numThreads;
+        for (int i = endParChar; i < strSize; i++) //match char to int map
+        {
+            char huffchar = input[i];
+            int bitmapSize = bitmapOutput.chars.size();
+
+            for (int j = 0; j < bitmapSize; j++)
+            {
+                if (huffchar == bitmapOutput.chars[j])
+                {
+                    string tovec = bitmapOutput.binaryValues[j];
+                    huffmanString = huffmanString + tovec;
+                }
+            }
+        }
+    }
     
 	return huffmanString;
 }
