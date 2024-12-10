@@ -89,7 +89,7 @@ string makeBitString(MinHeapNode* root, string input, vector<int> arr) {
     
 	for (size_t m = 0; m < numThreads; m++){
 		huffmanString = huffmanString + privStr[m];
-		cout << huffmanString << endl;
+	//cout << huffmanString << endl;
 	}
 
     if ((strSize % numThreads) != 0){
