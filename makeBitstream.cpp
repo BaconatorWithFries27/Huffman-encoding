@@ -51,44 +51,46 @@ string makeBitString(MinHeapNode* root, string input, vector<int> arr) {
 
 	makeBitmap(root, arr, 0);
 
-    int numThreads = omp_get_num_threads(void);
+    int numThreads = 1;
 
 	int strSize = input.size();
 	string huffmanString;
+    int thread_id = 0;
 
-	int seglength = (strSize / numThreads);
+#ifdef _OPENMP
+        numThreads = omp_get_max_threads();
+#endif
+    int seglength = (strSize / numThreads);
 	std::vector<string> privStr(numThreads);
 
 #pragma omp parallel default(shared)
-      {
-
-         int thread_id = 0;
+    {
 
 #ifdef _OPENMP
-         thread_id = omp_get_thread_num();
+        thread_id = omp_get_thread_num();
 #endif
 
-#pragma omp parallel for	
-	for (int i = 0; i < seglength; i++) //match char to int map
-	{
-		char huffchar = input[(thread_id * seglength) + i];
-		int bitmapSize = bitmapOutput.chars.size();
+#pragma omp parallel for
+        for (int i = 0; i < seglength; i++) //match char to int map
+        {
+            char huffchar = input[(thread_id * seglength) + i];
+            int bitmapSize = bitmapOutput.chars.size();
 
-		for (int j = 0; j < bitmapSize; j++)
-		{
-			if (huffchar == bitmapOutput.chars[j])
-			{
-				string tovec = bitmapOutput.binaryValues[j];
-				privStr[thread_id] = privStr[thread_id] + tovec;
-			}
-		}
-	}
-	}
-
+            for (int j = 0; j < bitmapSize; j++)
+            {
+                if (huffchar == bitmapOutput.chars[j])
+                {
+                    string tovec = bitmapOutput.binaryValues[j];
+                    privStr[thread_id] = privStr[thread_id] + tovec;
+                }
+            }
+        }
+    }
 	for (size_t m = 0; m < numThreads; m++){
 		huffmanString = huffmanString + privStr[m];
 		cout << huffmanString << endl;
 	}
+    
 	return huffmanString;
 }
 
