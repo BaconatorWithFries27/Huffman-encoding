@@ -53,3 +53,81 @@ void decode(string bitString, struct MinHeapNode *root) {
         }
     }
 }
+
+void uintDecode(uintStream u, struct MinHeapNode *root){
+    int veclen = u.vec.size();
+    int decodeLen = veclen;
+    if (u.len % 64 != 0) {decodeLen--;}
+
+    string potentialChar;
+    MinHeapNode *originalRoot = root;
+
+
+    for (size_t i = 0; i < decodeLen; i++)
+    {
+        uint64_t num = u.vec[i];
+
+        for (int j = 63; j >= 0; --j) {
+        uint64_t mask = 1ULL << j;  // Create a mask with only the ith bit set
+        if (num & mask)
+        {
+            if (root->right) {
+                potentialChar = potentialChar + "1";
+                root = root->right;
+            } 
+        } else {
+            if (root->left) {
+                potentialChar = potentialChar + "0";
+                root = root->left;
+            }
+        }
+        if (isLeaf(root)) {
+            root = originalRoot;
+            bitmap bitmapOutput = getBitmap();
+
+            for (int i = 0; i < bitmapOutput.binaryValues.size(); i++) {
+                if (bitmapOutput.binaryValues[i] == potentialChar) {
+                    cout << bitmapOutput.chars[i];
+                    potentialChar = "";
+                }
+            }
+        }
+        }
+       
+    }
+      if (u.len % 64 != 0)
+        {
+             uint64_t num = u.vec[decodeLen];
+
+        int modEnd = (63 - (u.len % 64) - 1);
+
+        for (int j = 63; j >= modEnd; --j) {
+        uint64_t mask = 1ULL << j;  // Create a mask with only the ith bit set
+        if (num & mask)
+        {
+            if (root->right) {
+                potentialChar = potentialChar + "1";
+                root = root->right;
+            } 
+        } else {
+            if (root->left) {
+                potentialChar = potentialChar + "0";
+                root = root->left;
+            }
+        }
+        if (isLeaf(root)) {
+            root = originalRoot;
+            bitmap bitmapOutput = getBitmap();
+
+            for (int i = 0; i < bitmapOutput.binaryValues.size(); i++) {
+                if (bitmapOutput.binaryValues[i] == potentialChar) {
+                    cout << bitmapOutput.chars[i];
+                    potentialChar = "";
+                }
+            }
+        }
+        }
+        }
+    }
+    
+

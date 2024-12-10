@@ -75,4 +75,7 @@ int main(){
 
     cout << "\nRun time is: " << duration.count() << " microseconds" << endl;
 
+    uintStream bitvec = stringToVec(bitstream);
+
+    uintDecode(bitvec, root);
 }
