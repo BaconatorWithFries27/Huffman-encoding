@@ -57,6 +57,8 @@ int main(){
         // like take the input and break it into a fixed length and make more calls to the decoder?
 
     // Convert the input string into a bitstream using the above huffman tree.
+    auto stringstart = high_resolution_clock::now();
+    
     string bitstream = makeBitString(root, input, completedArrays.freqs);
 
 
@@ -69,13 +71,29 @@ int main(){
 
     decode(bitstream, root);
 
-    auto stop = high_resolution_clock::now();
+    auto stringstop = high_resolution_clock::now();
 
-    auto duration = duration_cast<microseconds>(stop - start);
-
-    cout << "\nRun time is: " << duration.count() << " microseconds" << endl;
+    auto uintstart = high_resolution_clock::now();
 
     uintStream bitvec = stringToVec(bitstream);
 
     uintDecode(bitvec, root);
+
+    auto uintstop = high_resolution_clock::now();
+
+    auto stop = high_resolution_clock::now();
+
+    auto stringduration = duration_cast<microseconds>(stringstop - stringstart);
+
+    auto duration = duration_cast<microseconds>(stop - start);
+
+    auto uintduration = duration_cast<microseconds>(uintstop - uintstart);
+
+    cout << "\nstring runtime is: " << stringduration.count() << " microseconds" << endl;
+
+    cout << "\nuint runtime is: " << uintduration.count() << " microseconds" << endl;
+
+    cout << "\nfull runtime is: " << duration.count() << " microseconds" << endl;
+
+    cout << "Size of input: " << input.capacity() << " Size of bitstring: " << bitstream.capacity() << " Size of bitvec: " << bitvec.vec.capacity() * sizeof(uint64_t) << endl;
 }

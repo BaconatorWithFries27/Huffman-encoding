@@ -128,6 +128,7 @@ void uintDecode(uintStream u, struct MinHeapNode *root){
         }
         }
         }
+        cout << endl;
     }
     
 
